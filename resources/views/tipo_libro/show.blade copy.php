@@ -23,7 +23,8 @@
                <th>Editar</th>
                <th>Eliminar</th>
              </thead>
-             <tbody>   
+             <tbody>
+              @if($libros->count())  
               @foreach($libros as $libro)  
               <tr>
                 <td>{{$libro->nombre}}</td>
@@ -42,12 +43,17 @@
                  </td>
                </tr>
                @endforeach 
+               @else
+               <tr>
+                <td colspan="8">No hay registro !!</td>
+              </tr>
+              @endif
             </tbody>
 
           </table>
         </div>
       </div>
-      
+      {{ $libros->links() }}
     </div>
   </div>
 </section>

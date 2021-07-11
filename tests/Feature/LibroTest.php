@@ -13,19 +13,48 @@ class LibroTest extends TestCase
      * @return void
      */
     /** @test */
-    function it_creates_a_new_libro()
+
+    function test_lista_libros() 
     {
-        $this->post('/libro/', [
-            'name' => 'Ana Carolina Aristizabal',
-            'email' => 'ana@yop.net',
-            'password' => 'Ana345***'
+    $this->get('/libro')
+    ->assertStatus(200)
+    ->assertSee('libro');
+    }
+
+    function test_crear_libros() 
+    {
+    $this->get('/libro/create')
+    ->assertStatus(200)
+    ->assertSee('libro');
+    }
+
+    function test_editar_libros($id) 
+    {
+    $this->get('/libro/{id}/edit')
+    ->assertStatus(200)
+    ->assertSee('libro');
+    }
+    function test_crear_nuevo_libro_form()
+    {
+        $this->post('/libro/create', [
+            'nombre' => 'Libro_nuevo',
+            'npagina' => 6,
+            'resumen' => 'este es un resumen',
+            'edicion' => 10,
+            'precio' => 4000,
+            'autor' => 'Ana',
+            'tipo_libro' => 1
         ]);
 
 
         $this->assertDatabaseHas('libros', [
-            'name' => 'Ana Carolina Aristizabal',
-            'email' => 'ana@yop.net',
-            'password' => 'Ana345***'
+            'nombre' => 'Libro_nuevo',
+            'npagina' => 6,
+            'resumen' => 'este es un resumen',
+            'edicion' => 10,
+            'precio' => 4000,
+            'autor' => 'Ana',
+            'tipo_librof' => 1
         ]);
     }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Request;
 use App\Repositories;
 use App\Libro;
+use App\tipo_libro;
+use DB;
 use App\Http\Requests\StoreLibroRequest;
 use App\Repositories\LibroRepository;
 
@@ -19,8 +21,8 @@ class LibroController extends Controller
     public function index()
     {
         //
-        $libros=Libro::orderBy('id','DESC')->paginate(3);
-        return view('Libro.index',compact('libros')); 
+        $libros=DB::select( 'CALL get_libros()');
+        return view('Libro.index',compact('libros'));
     }
 
     /**
@@ -31,7 +33,8 @@ class LibroController extends Controller
     public function create()
     {
         //
-        return view('Libro.create');
+        $tipo_libros = tipo_libro::orderBy('id','DESC')->get();
+        return view('Libro.create',compact('tipo_libros'));
     }
 
     /**
@@ -56,9 +59,10 @@ class LibroController extends Controller
     public function edit(LibroRepository $libroRepository , $id)
     {  
         //return response()->json($libroRepository->editar($id));
+        $tipo_libros = tipo_libro::orderBy('id','DESC')->get();
         $libro= $libroRepository->editar($id);
-        //var_dump($libro);
-        return view('libro.edit',compact('libro'));
+        //dd($libro[0]->id);
+        return view('libro.edit',compact('libro','tipo_libros'));
     }
 
     /**
@@ -69,6 +73,7 @@ class LibroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StoreLibroRequest $request , LibroRepository $libroRepository, $id)    {
+
         
         $libro = $libroRepository->actualizar($request,$id);
         return redirect()->route('libro.index')->with('success','Registro actualizado satisfactoriamente');

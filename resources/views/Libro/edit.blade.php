@@ -25,40 +25,49 @@
 				</div>
 				<div class="panel-body">					
 					<div class="table-container">
-						<form method="POST" action="{{ route('libro.update',$libro->id) }}"  role="form">
+					{{$libro[0]->id }}
+						<form method="POST" action="{{ route('libro.update',$libro[0]->id)}}"  role="form">
 							{{ csrf_field() }}
 							<input name="_method" type="hidden" value="PATCH">
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="nombre" id="nombre" class="form-control input-sm" value="{{$libro->nombre}}">
+										<input type="text" name="nombre" id="nombre" class="form-control input-sm" value="{{$libro[0]->nombre}}" required />
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="npagina" id="npagina" class="form-control input-sm" value="{{$libro->npagina}}">
+										<input type="number" name="npagina" id="npagina" class="form-control input-sm" value="{{$libro[0]->npagina}}" required />
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<textarea name="resumen" class="form-control input-sm"  placeholder="Resumen">{{$libro->resumen}}</textarea>
+								<textarea name="resumen" class="form-control input-sm"  placeholder="Resumen" required>{{$libro[0]->resumen}}</textarea>
 							</div>
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="edicion" id="edicion" class="form-control input-sm" value="{{$libro->edicion}}">
+										<input type="number" name="edicion" id="edicion" class="form-control input-sm" value="{{$libro[0]->edicion}}" required />
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="precio" id="precio" class="form-control input-sm" value="{{$libro->precio}}">
+										<input type="number" name="precio" id="precio" class="form-control input-sm" value="{{$libro[0]->precio}}" required />
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea name="autor" class="form-control input-sm" placeholder="Autor">{{$libro->autor}}</textarea>
+								<textarea name="autor" class="form-control input-sm" placeholder="Autor" required>{{$libro[0]->autor}}</textarea>
 							</div>
+							<div class="form-group">
+								<select name ="tipo_libro" id ="tipo_libro"  class="form-control mb-2" required>
+									<option  value="{{$libro[0]->tipo_librof}}" selected>{{$libro[0]->nombre_tipo}}</option>
+                    				@foreach($tipo_libros as $key=>$tipo)
+                    						<option  value={{$tipo->id}}>{{ $tipo->nombre_tipo }}</option>
+                   			 		@endforeach
+                				</select>
+							</div>       
 							<div class="row">
 
 								<div class="col-xs-12 col-sm-12 col-md-12">

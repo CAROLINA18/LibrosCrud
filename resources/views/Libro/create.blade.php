@@ -30,34 +30,42 @@
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Nombre del libro">
+										<input type="text" name="nombre" id="nombre" class="form-control input-sm" placeholder="Nombre del libro" required>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="npagina" id="npagina" class="form-control input-sm" placeholder="Número de Páginas">
+										<input type="number" name="npagina" id="npagina" class="form-control input-sm" placeholder="Número de Páginas" required>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<textarea name="resumen" class="form-control input-sm" placeholder="Resumen"></textarea>
+								<textarea name="resumen" class="form-control input-sm" placeholder="Resumen" required></textarea>
 							</div>
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="edicion" id="edicion" class="form-control input-sm" placeholder="Edición del libro">
+										<input type="number" name="edicion" id="edicion" class="form-control input-sm" placeholder="Edición del libro" required>
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="precio" id="precio" class="form-control input-sm" placeholder="Precio del libro">
+										<input type="number" name="precio" id="precio" class="form-control input-sm" placeholder="Precio del libro" required>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea name="autor" class="form-control input-sm" placeholder="Autor"></textarea>
+								<textarea name="autor" class="form-control input-sm" placeholder="Autor" required></textarea>
 							</div>
+							<div class="form-group">
+								<select name ="tipo_libro" id ="tipo_libro"  class="form-control mb-2" required>
+                    				@foreach($tipo_libros as  $tipo)
+                    					<option  value={{$tipo->id}}>{{ $tipo->nombre_tipo }}</option>
+                   			 		@endforeach
+                				</select>
+							</div>           
+
 							<div class="row">
 
 								<div class="col-xs-12 col-sm-12 col-md-12">

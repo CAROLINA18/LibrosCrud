@@ -16,11 +16,14 @@ class CreateLibrosTable extends Migration
         Schema::create('libros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('resumen');
-            $table->integer('npagina');
+            $table->index('nombre');
+            $table->text('resumen')->nullable();
+            $table->integer('npagina')->nullable();
             $table->integer('edicion');
+            $table->unsignedInteger('tipo_librof');
+            $table->foreign('tipo_librof')->references('id')->on('tipo_libros');
             $table->string('autor');
-            $table->decimal('precio',5,2);
+            $table->integer('precio');
             $table->timestamps();
         });
     }
